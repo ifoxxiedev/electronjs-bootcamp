@@ -34,6 +34,7 @@ function createWindow(): void {
     height: 670,
     show: true,
     autoHideMenuBar: false,
+    backgroundColor: '#030712',
     icon: iconPath,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),

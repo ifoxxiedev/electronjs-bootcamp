@@ -1,6 +1,6 @@
-# devcustomers
+# Devcustomers
 
-An Electron application with React and TypeScript
+An Electron application with React and TypeScript, Electron Router Dom, Radix and More
 
 ## Recommended IDE Setup
 
@@ -31,4 +31,24 @@ $ yarn build:mac
 
 # For Linux
 $ yarn build:linux
+```
+
+### Libraries and Docs
+
+- Electron Router Dom
+
+```
+https://electron-router-dom.daltonmenezes.com/docs
+```
+
+- Tailwind CSS
+
+```
+https://tailwindcss.com/docs/guides/vite
+```
+
+- Radix UI
+
+```
+https://www.radix-ui.com/themes/docs/overview/getting-started
 ```
