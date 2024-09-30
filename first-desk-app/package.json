@@ -1,0 +1,12 @@
+{
+  "name": "first-desk-app",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "electron ."
+  },
+  "dependencies": {
+    "electron": "^32.1.2"
+  }
+}
