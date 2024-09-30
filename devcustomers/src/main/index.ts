@@ -6,6 +6,7 @@ import { createTray } from './tray'
 
 import './ipc'
 import './store'
+import { createShortcuts } from './shortcuts'
 
 function getIcon(platform: NodeJS.Platform): string {
   switch (platform) {
@@ -64,6 +65,7 @@ async function createWindow(): Promise<void> {
   })
 
   await createTray(mainWindow)
+  await createShortcuts(mainWindow)
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
