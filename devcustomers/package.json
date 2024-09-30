@@ -23,6 +23,8 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
+    "electron-router-dom": "^2.0.0",
+    "react-router-dom": "^6.26.2",
     "vite-plugin-static-copy": "^1.0.6"
   },
   "devDependencies": {

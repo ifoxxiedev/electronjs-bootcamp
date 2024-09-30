@@ -1,7 +1,7 @@
+import path, { join } from 'path'
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png'
+import { registerRoute } from '../lib/electron-router-dom'
 
 function getIcon(platform: NodeJS.Platform): string {
   switch (platform) {
@@ -14,6 +14,14 @@ function getIcon(platform: NodeJS.Platform): string {
     default:
       throw new Error('Unsupported platform')
   }
+}
+
+function getRendererFilePath() {
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    return process.env['ELECTRON_RENDERER_URL']
+  }
+
+  return path.join(__dirname, '../renderer/index.html')
 }
 
 function createWindow(): void {
@@ -48,11 +56,15 @@ function createWindow(): void {
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
-  } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
-  }
+  const rendererFilePath = getRendererFilePath()
+
+  mainWindow.loadURL(rendererFilePath)
+
+  registerRoute({
+    id: 'main',
+    browserWindow: mainWindow,
+    htmlFile: rendererFilePath
+  })
 }
 
 // This method will be called when Electron has finished

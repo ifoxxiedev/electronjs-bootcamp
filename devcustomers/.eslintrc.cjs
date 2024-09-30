@@ -1,4 +1,8 @@
 module.exports = {
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn'
+  },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
