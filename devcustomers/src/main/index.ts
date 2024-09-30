@@ -3,6 +3,8 @@ import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { registerRoute } from '../lib/electron-router-dom'
 import { createTray } from './tray'
+
+import './ipc'
 import './store'
 
 function getIcon(platform: NodeJS.Platform): string {

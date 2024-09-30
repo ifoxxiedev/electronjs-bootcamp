@@ -29,7 +29,7 @@ export default function Layout() {
       <Sidebar />
       <div className="flex-1 flex flex-col max-h-screen ">
         <Header isSidebarOpen={isSidebarOpen} />
-        <div className="px-6 pt-8 overflow-y-auto ">
+        <div className="px-6 pt-8 overflow-y-auto flex flex-1 ">
           <Outlet />
         </div>
       </div>

@@ -31,6 +31,10 @@ export const api = {
   },
   deleteCustomer: (id: string): Promise<Result<string>> => {
     return ipcRenderer.invoke('delete-customer', id)
+  },
+
+  getAppDetails: (): Promise<{ version: string; name: string }> => {
+    return ipcRenderer.invoke('app-details')
   }
 }
 

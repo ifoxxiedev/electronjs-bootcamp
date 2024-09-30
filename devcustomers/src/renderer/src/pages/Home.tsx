@@ -10,13 +10,24 @@ export default function Home() {
   if (isLoading) {
     return <div>loading...</div>
   }
+
+  const customers = data?.data ?? []
+
+  if (!customers.length) {
+    return (
+      <div className="flex flex-1 justify-center pt-8">
+        <h3 className="text-2xl text-center font-semibold">Não há clientes cadastrados</h3>
+      </div>
+    )
+  }
+
   return (
     <div className="flex-1 flex-col text-white">
       <div>
         <h1 className="text-white text-xl lg:text-2xl font-semibold mb-4">Meus Clientes</h1>
       </div>
       <section className="flex flex-col gap-6 w-full h-screen">
-        {data?.data?.map((customer: Customer) => (
+        {customers?.map((customer: Customer) => (
           <Link
             to={`detail/${customer._id}`}
             key={customer._id}
