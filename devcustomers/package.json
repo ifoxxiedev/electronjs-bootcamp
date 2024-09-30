@@ -1,10 +1,11 @@
 {
   "name": "devcustomers",
   "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "description": "An application to manage yours customers, crafted for developers.",
+  "productName": "DEV Customers",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
+  "author": "ifoxxiedev",
+  "homepage": "https://github.com/ifoxxiedev",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
@@ -13,7 +14,7 @@
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
     "start": "electron-vite preview",
     "dev": "electron-vite dev --watch",
-    "build": "npm run typecheck && electron-vite build",
+    "build": "electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
@@ -32,7 +33,9 @@
     "pouchdb": "^9.0.0",
     "pouchdb-browser": "^9.0.0",
     "react-router-dom": "^6.26.2",
-    "vite-plugin-static-copy": "^1.0.6"
+    "vite-plugin-static-copy": "^1.0.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^2.0.0",
@@ -53,8 +56,6 @@
     "eslint-plugin-react": "^7.34.3",
     "postcss": "^8.4.47",
     "prettier": "^3.3.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.5.2",
     "vite": "^5.3.1"

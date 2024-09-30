@@ -42,7 +42,8 @@ async function createWindow(): Promise<void> {
     width: width,
     height: height,
     show: true,
-    autoHideMenuBar: false,
+    // autoHideMenuBar: false,
+    autoHideMenuBar: true,
     backgroundColor: '#030712',
     icon: iconPath,
     webPreferences: {
@@ -57,6 +58,7 @@ async function createWindow(): Promise<void> {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
+    // mainWindow.webContents.openDevTools()
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {

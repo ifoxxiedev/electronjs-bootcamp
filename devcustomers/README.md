@@ -52,3 +52,9 @@ https://tailwindcss.com/docs/guides/vite
 ```
 https://www.radix-ui.com/themes/docs/overview/getting-started
 ```
+
+- PouchDB
+
+```
+https://pouchdb.com/download.html
+```
