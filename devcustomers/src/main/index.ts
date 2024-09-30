@@ -2,6 +2,7 @@ import path, { join } from 'path'
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { registerRoute } from '../lib/electron-router-dom'
+import { createTray } from './tray'
 
 function getIcon(platform: NodeJS.Platform): string {
   switch (platform) {
@@ -24,7 +25,7 @@ function getRendererFilePath() {
   return path.join(__dirname, '../renderer/index.html')
 }
 
-function createWindow(): void {
+async function createWindow(): Promise<void> {
   const platform = process.platform
   const iconPath = getIcon(platform)
 
@@ -54,6 +55,8 @@ function createWindow(): void {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
+
+  await createTray(mainWindow)
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
