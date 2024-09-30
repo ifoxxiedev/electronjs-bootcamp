@@ -2,10 +2,21 @@ import { resolve } from 'path'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import react from '@vitejs/plugin-react'
 import tailwindCss from 'tailwindcss'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [
+      externalizeDepsPlugin(),
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'resources/*', // from: ./resource
+            dest: 'resources' // to: ./out/main/resources
+          }
+        ]
+      })
+    ]
   },
   preload: {
     plugins: [externalizeDepsPlugin()]

@@ -1,21 +1,41 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+import icon from '../../resources/icon.png'
+
+function getIcon(platform: NodeJS.Platform): string {
+  switch (platform) {
+    case 'linux':
+      return join(__dirname, '../../resources/icon.png')
+    case 'win32':
+      return join(__dirname, '../../resources/icon.ico')
+    case 'darwin':
+      return join(__dirname, '../../resources/icon.icns')
+    default:
+      throw new Error('Unsupported platform')
+  }
+}
 
 function createWindow(): void {
+  const platform = process.platform
+  const iconPath = getIcon(platform)
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     show: true,
     autoHideMenuBar: false,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    icon: iconPath,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
     }
   })
+
+  if (platform === 'darwin') {
+    app.dock.setIcon(iconPath)
+  }
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
