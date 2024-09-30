@@ -6,9 +6,6 @@ jobs:
   release:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: ./devcustomers
 
     strategy:
       matrix:
