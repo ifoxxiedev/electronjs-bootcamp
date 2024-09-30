@@ -1,6 +1,16 @@
 import { Menu, Tray, nativeImage, BrowserWindow } from 'electron'
 import path from 'path'
 
+function showWindow(browserWindow: BrowserWindow) {
+  if (browserWindow.isMinimizable()) {
+    browserWindow.restore()
+  }
+
+  if (!browserWindow.isFocused()) {
+    browserWindow.focus()
+  }
+}
+
 export async function createTray(browserWindow: BrowserWindow) {
   const appIcon = path.join(__dirname, 'resources', 'icon.png')
   const icon = nativeImage.createFromPath(appIcon)
@@ -18,15 +28,19 @@ export async function createTray(browserWindow: BrowserWindow) {
     {
       label: 'Abrir',
       click: () => {
-        browserWindow.maximize()
-        browserWindow.show()
+        showWindow(browserWindow)
       }
     },
     {
       label: 'Cadastrar Cliente',
       click: () => {
-        browserWindow.maximize()
-        browserWindow.show()
+        if (browserWindow.isFocused()) {
+          return
+        }
+
+        showWindow(browserWindow)
+        // it sends a message from [main process] (backend) to [renderer process] (frontend)
+        browserWindow.webContents.send('new-customer')
       }
     },
     {

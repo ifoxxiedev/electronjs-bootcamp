@@ -28,6 +28,8 @@
     "clsx": "^2.1.1",
     "electron-router-dom": "^2.0.0",
     "phosphor-react": "^1.4.1",
+    "pouchdb": "^9.0.0",
+    "pouchdb-browser": "^9.0.0",
     "react-router-dom": "^6.26.2",
     "vite-plugin-static-copy": "^1.0.6"
   },
@@ -36,6 +38,8 @@
     "@electron-toolkit/eslint-config-ts": "^2.0.0",
     "@electron-toolkit/tsconfig": "^1.0.1",
     "@types/node": "^20.14.8",
+    "@types/pouchdb": "^6.4.2",
+    "@types/pouchdb-browser": "^6.1.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

@@ -1,8 +1,9 @@
 import path, { join } from 'path'
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { registerRoute } from '../lib/electron-router-dom'
 import { createTray } from './tray'
+import './store'
 
 function getIcon(platform: NodeJS.Platform): string {
   switch (platform) {
@@ -29,10 +30,14 @@ async function createWindow(): Promise<void> {
   const platform = process.platform
   const iconPath = getIcon(platform)
 
+  const primaryDisplay = screen.getPrimaryDisplay()
+  const { width, height } = primaryDisplay.workAreaSize
+  console.log('width', width, 'height', height)
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: width,
+    height: height,
     show: true,
     autoHideMenuBar: false,
     backgroundColor: '#030712',
