@@ -20,6 +20,7 @@ export const api = {
     }
   },
   addNewCustomer: (customer: NewCustomer): Promise<Result<Customer>> => {
+    console.log('Adding customer', customer)
     return ipcRenderer.invoke('new-customer', customer)
   },
   getCustomers: (): Promise<Result<Customer[]>> => {
