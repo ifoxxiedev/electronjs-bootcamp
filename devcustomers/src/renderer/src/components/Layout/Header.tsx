@@ -7,7 +7,7 @@ export default function Header({ isSidebarOpen }: { isSidebarOpen: boolean }) {
     <div
       id="header"
       className={clsx(
-        'flex items-center gap-4 lead-tight relative border-b border-slate-600 py-[1.25rem] px-6',
+        'flex items-center gap-4 lead-tight relative border-b border-slate-600 py-[1.25rem] px-6 region-drag',
         {
           'pl-24': !isSidebarOpen && process.platform === 'darwin',
           'w-screen': !isSidebarOpen,
