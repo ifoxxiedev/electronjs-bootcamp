@@ -1,12 +1,6 @@
 import { useEffect } from 'react'
 
 export default function Create() {
-  useEffect(() => {
-    ;(async () => {
-      const customers = await window.api.getCustomers()
-      console.log('Customers', customers)
-    })()
-  }, [])
   const handleAddCustomer = async () => {
     const r = await window.api.addNewCustomer({
       email: 'example@example.com',

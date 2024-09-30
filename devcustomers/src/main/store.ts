@@ -1,9 +1,10 @@
 import path from 'node:path'
 import fs from 'node:fs'
 import { randomUUID } from 'node:crypto'
-import { app, ipcMain } from 'electron'
 import PouchDb from 'pouchdb'
+import { app, ipcMain } from 'electron'
 import { Customer } from '../shared/types/ipc'
+import { Result } from '../shared/types/result'
 
 let dbPath
 
@@ -27,23 +28,40 @@ const db = new PouchDb<Customer>(dbPath)
 ipcMain.handle('new-customer', async (_, customer) => {
   try {
     console.log('Adding customer', json(customer))
-
     const result = await db.put({ ...customer, _id: randomUUID() })
 
-    return {
-      data: result,
-      error: null
-    }
+    return Result.of(result)
   } catch (err) {
-    return {
-      data: null,
-      error: err
-    }
+    return Result.ofError(err)
   }
 })
 
 ipcMain.handle('get-customers', async () => {
-  const result = await db.allDocs({})
+  try {
+    const result = await db.allDocs({ include_docs: true })
+    return Result.of(result.rows.map((row) => row.doc))
+  } catch (err) {
+    return Result.ofError(err)
+  }
+})
 
-  return result.rows
+ipcMain.handle('get-customer', async (_, id) => {
+  try {
+    const result = await db.get(id)
+    return Result.of(result)
+  } catch (err) {
+    return Result.ofError(err)
+  }
+})
+
+ipcMain.handle('delete-customer', async (_, id) => {
+  try {
+    const doc = await db.get(id)
+    if (doc) {
+      await db.remove(doc._id, doc._rev)
+    }
+    return Result.of(id)
+  } catch (err) {
+    return Result.ofError(err)
+  }
 })
